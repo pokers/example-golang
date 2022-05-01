@@ -1,0 +1,3 @@
+The simple test page is shown.
+How are You?
+Added to string
