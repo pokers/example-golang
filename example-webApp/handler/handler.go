@@ -42,6 +42,7 @@ func getValidPath(index int, res http.ResponseWriter, req *http.Request) (string
 	return path[index], nil
 }
 
+
 func initTemplates(){
 	templates = template.Must(template.ParseFiles("./html/edit.html", "./html/view.html"))
 }
@@ -50,7 +51,21 @@ func initValidPath(path []string){
 	validPath = regexp.MustCompile("^/("+ strings.Join(path, "|") + ")/([a-zA-Z0-9]+)$")
 }
 
+////////////////////////////////////////////////////
+// Public
 func InitHandler(path []string){
 	initTemplates()
 	initValidPath(path)
+}
+
+func BuildHandler(index int, fnProc func(http.ResponseWriter, *http.Request, string)) http.HandlerFunc {
+	return func(res http.ResponseWriter, req *http.Request){
+		fmt.Println("path : ", req.URL.Path)
+		var path []string = validPath.FindStringSubmatch(req.URL.Path)
+		if path == nil || len(path) < index {
+			http.NotFound(res, req)
+			return 
+		}
+		fnProc(res, req, path[index])
+	}
 }
