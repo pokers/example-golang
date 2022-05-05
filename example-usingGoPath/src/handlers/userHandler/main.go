@@ -42,15 +42,3 @@ func main() {
 	plog.PrintMsg("userHandler starting...\n")
 	lambda.Start(HandleRequest)
 }
-
-func swap() {
-	a := 1
-	b := 2
-
-	a = b
-	b = a
-
-	tmp := a
-	a = b
-	b = tmp
-}
