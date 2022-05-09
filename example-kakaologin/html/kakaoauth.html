@@ -1,0 +1,40 @@
+<head>
+    <head>
+        <title> 카카오 로그인 테스트 페이지 </title>
+        <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script id="kakaologin">
+            function test(){
+                document.getElementById('testbtn').innerHTML = 'aaa';
+            }
+            async function init (){
+                console.log("Initialize...")
+            }
+            init()
+        </script>
+        <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+        <style>
+            input {
+                vertical-align: middle;
+            }
+            input.form-text {
+                border: 1px solid #bcbcbc;
+                height: 28px;
+            }
+            input.img-button {
+                background: url( "/assets/kakao_login_medium_narrow.png" ) no-repeat;
+                border: none;
+                width: 183px;
+                height: 45px;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>{{.Name}}</h1>
+        <div>Token : {{.Token}}</div>
+        <script>
+            Kakao.init({{.ClientId}})
+            Kakao.Auth.setAccessToken({{.Token}})
+        </script>
+    </body>
+</head>

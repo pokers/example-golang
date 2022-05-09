@@ -1,0 +1,50 @@
+<head>
+    <head>
+         <title>{{.Name}}</title>
+        <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script id="kakaologin">
+            function test(){
+                document.getElementById('testbtn').innerHTML = 'aaa';
+            }
+            async function init (){
+                console.log("Initialize...")
+            }
+            init()
+        </script>
+        <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+        <script>
+            function initKakao(clientId){
+                Kakao.init(clientId);
+                console.log(Kakao.isInitialized());
+            }
+        </script>
+        <script>
+            function kakaologin(redirectUri){
+                Kakao.Auth.authorize({
+                  redirectUri: redirectUri
+                });
+            }
+        </script>
+        <style>
+            input {
+                vertical-align: middle;
+            }
+            input.form-text {
+                border: 1px solid #bcbcbc;
+                height: 28px;
+            }
+            input.img-button {
+                background: url( "/assets/kakao_login_medium_narrow.png" ) no-repeat;
+                border: none;
+                width: 183px;
+                height: 45px;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <div><h1>{{printf "%s" .Body}}</h1></div>
+        <script>initKakao({{.ClientId}})</script>
+        <input type="button" class="img-button" onclick="kakaologin({{.RedirectURL}})">
+    </body>
+</head>
